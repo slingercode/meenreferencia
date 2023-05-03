@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --color: theme(colors.white);
-  --background-color: theme(colors.gray.950);
+  --color: theme(colors.black);
+  --background-color: theme(colors.white);
 }
 
 body {

@@ -10,16 +10,13 @@ type ButtonProps = {
 
 export function Button({ name }: ButtonProps) {
   const router = useRouter();
-  const params = useSearchParams();
   const [isPending, startTransition] = useTransition();
-
-  const secret = params.get("secret");
 
   async function handleClick() {
     startTransition(() => router.refresh());
     const body = JSON.stringify({ name });
 
-    await fetch(`/api/count?secret=${secret}`, {
+    await fetch(`/api/count`, {
       method: "POST",
       body,
     });
