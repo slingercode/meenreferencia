@@ -1,8 +1,10 @@
+"use server";
+
 import { sql } from "@vercel/postgres";
 
 export type Names = "Noel" | "Diego";
 
-export type BroType = {
+type CountType = {
   name: Names;
   count: number;
 };
@@ -10,7 +12,7 @@ export type BroType = {
 export async function getCount() {
   try {
     const { rows } =
-      await sql<BroType>`SELECT * from meenreferencia ORDER BY name`;
+      await sql<CountType>`SELECT * from meenreferencia ORDER BY name`;
 
     return rows;
   } catch (error) {
