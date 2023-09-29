@@ -1,21 +1,26 @@
-import { Button } from "~/components/button";
-import { getCount } from "~/lib/count";
+import { Terminal } from "lucide-react";
 
-export default async function Index() {
-  const counts = await getCount();
+import { Form } from "~/components/form";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+
+import { getData } from "~/db/db.getters";
+
+export default async function Home() {
+  const rows = await getData();
 
   return (
-    <main className="h-screen w-screen flex justify-center items-center">
-      <div className="grid grid-row-2 sm:grid-cols-2 gap-24 p-10">
-        {counts.map(({ name, count }) => (
-          <div key={name}>
-            <p className="text-center text-lg">{name}</p>
-            <p className="text-center text-5xl py-4">{count}</p>
+    <main className="mx-auto flex h-screen max-w-screen-sm flex-col items-center justify-center gap-4 p-10 md:p-24">
+      {rows.map((row) => (
+        <Alert key={row.name}>
+          <Terminal className="h-4 w-4" />
+          <AlertTitle>{row.name}</AlertTitle>
 
-            <Button name={name} />
-          </div>
-        ))}
-      </div>
+          <AlertDescription className="flex flex-row items-center justify-between">
+            <p className="text-sm [&_p]:leading-relaxed">{`Points: ${row.count}`}</p>
+            <Form name={row.name} />
+          </AlertDescription>
+        </Alert>
+      ))}
     </main>
   );
 }

@@ -1,18 +1,21 @@
 import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
-type RootLayoutProps = {
-  children: React.ReactNode;
-};
+const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "meenreferencia",
-  description: "Listo el conteo",
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
