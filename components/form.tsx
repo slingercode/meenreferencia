@@ -3,11 +3,14 @@
 // @ts-ignore
 import { experimental_useFormState as useFormState } from "react-dom";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { Loader2, LucideIcon, Send } from "lucide-react";
 
-import { Button } from "~/components/ui/button";
 import { Row } from "~/db/db.interfaces";
 import { vote } from "~/db/db.actions";
-import { Loader2, LucideIcon, Send } from "lucide-react";
+
+import { Button } from "./ui/button";
+import { useToast } from "./ui/use-toast";
+import { useEffect } from "react";
 
 const initialState = {
   name: null,
@@ -43,7 +46,18 @@ function VoteButton() {
 }
 
 export function Form({ name }: { name: Row["name"] }) {
-  const [_, formAction] = useFormState(vote, initialState);
+  const { toast } = useToast();
+  const [state, formAction] = useFormState(vote, initialState);
+
+  useEffect(() => {
+    if (state?.error !== undefined) {
+      toast({
+        variant: "destructive",
+        title: "🤖 Failed to create",
+        description: state.error,
+      });
+    }
+  }, [state, toast]);
 
   return (
     <form action={formAction}>
