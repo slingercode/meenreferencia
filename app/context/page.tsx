@@ -1,3 +1,5 @@
+import { Quote } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { getContext } from "~/db/db.getters";
 
 export const revalidate = 0;
@@ -6,13 +8,19 @@ export default async function Comments() {
   const data = await getContext();
 
   return (
-    <main className="mx-auto flex h-[100dvh] max-w-screen-md flex-col items-center justify-center gap-4 p-10 md:p-24">
+    <main className="md:p-25 mx-auto grid max-w-screen-md gap-4 p-10">
       {data.map((context) => (
-        <div key={context.id}>
-          <p>{context.name}</p>
-          <p>{context.context}</p>
-          <p>{JSON.stringify(context.date)}</p>
-        </div>
+        <Alert key={context.id}>
+          <Quote className="h-3 w-3" fill="currentColor" />
+          <AlertTitle>{context.name}</AlertTitle>
+
+          <AlertDescription>
+            <p className="pb-2 italic">{`"${context.context}"`}</p>
+            <p className="text-right text-xs text-neutral-500">
+              {context.formated}
+            </p>
+          </AlertDescription>
+        </Alert>
       ))}
     </main>
   );
