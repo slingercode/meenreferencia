@@ -1,9 +1,9 @@
 import "./globals.css";
 
-import Link from "next/link";
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import Nav from "~/components/nav";
 import { Toaster } from "~/components/ui/toaster";
 import { ThemeProvider } from "~/providers/theme.provider";
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
         <ThemeProvider
           enableSystem
@@ -27,12 +27,10 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark"
         >
-          <nav className="absolute flex w-screen justify-between p-4">
-            <Link href="/">/</Link>
-            <Link href="/context">context</Link>
-          </nav>
+          <Nav />
 
           {children}
+
           <Toaster />
         </ThemeProvider>
       </body>

@@ -14,7 +14,7 @@ export const getData = async (): Promise<Row[]> => {
 export const getContext = async (): Promise<Context[]> => {
   try {
     const { rows } =
-      await sql<Context>`SELECT * from meenreferencia_context ORDER BY name`;
+      await sql<Context>`SELECT * from meenreferencia_context ORDER BY date ASC`;
 
     return rows;
   } catch (error: any) {

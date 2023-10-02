@@ -67,32 +67,33 @@ export function Form({ name, count }: { name: Row["name"]; count: number }) {
   }, [state, toast]);
 
   return (
-    <form action={formAction}>
+    <form action={formAction} className="flex items-center justify-between ">
       <input type="hidden" id="name" name="name" value={name} />
 
-      <div className="flex flex-row items-center justify-between">
-        <p className="text-sm [&_p]:leading-relaxed">{`Points: ${count}`}</p>
-        <VoteButton />
+      <div className="w-10/12">
+        <p className="text-sm">{`Points: ${count}`}</p>
+
+        <Collapsible>
+          <div className="flex items-center space-x-4">
+            <h4 className="text-sm font-semibold">Write the context?</h4>
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" size="sm" className="w-9 p-0">
+                <ChevronsUpDown className="h-4 w-4" />
+                <span className="sr-only">Toggle</span>
+              </Button>
+            </CollapsibleTrigger>
+          </div>
+          <CollapsibleContent className="pt-2">
+            <Input
+              id="context"
+              name="context"
+              placeholder="Type the context..."
+            />
+          </CollapsibleContent>
+        </Collapsible>
       </div>
 
-      <Collapsible>
-        <div className="flex items-center space-x-4">
-          <h4 className="text-sm font-semibold">Write the context?</h4>
-          <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm" className="w-9 p-0">
-              <ChevronsUpDown className="h-4 w-4" />
-              <span className="sr-only">Toggle</span>
-            </Button>
-          </CollapsibleTrigger>
-        </div>
-        <CollapsibleContent className="pt-5">
-          <Input
-            id="context"
-            name="context"
-            placeholder="Type the context..."
-          />
-        </CollapsibleContent>
-      </Collapsible>
+      <VoteButton />
     </form>
   );
 }
