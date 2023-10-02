@@ -14,6 +14,13 @@ export async function vote(_: any, formData: FormData) {
 
     await sql`UPDATE meenreferencia SET count = count + 1 WHERE name = ${name}`;
 
+    const context = (formData.get("context") ?? "").toString();
+
+    if (context !== "") {
+      await sql`INSERT INTO meenreferencia_context (name, context) VALUES (${name}, ${context})`;
+      revalidatePath("/context");
+    }
+
     return revalidatePath("/");
   } catch (error: any) {
     const { message = "There was a error" } = error || {};

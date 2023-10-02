@@ -1,8 +1,10 @@
 import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Toaster } from "~/components/ui/toaster";
 
+import Link from "next/link";
+import { type Metadata } from "next";
+import { Inter } from "next/font/google";
+
+import { Toaster } from "~/components/ui/toaster";
 import { ThemeProvider } from "~/providers/theme.provider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,6 +27,11 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark"
         >
+          <nav className="absolute flex w-screen justify-between p-4">
+            <Link href="/">/</Link>
+            <Link href="/context">context</Link>
+          </nav>
+
           {children}
           <Toaster />
         </ThemeProvider>

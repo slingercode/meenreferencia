@@ -3,17 +3,24 @@
 // @ts-ignore
 import { experimental_useFormState as useFormState } from "react-dom";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
-import { Loader2, LucideIcon, Send } from "lucide-react";
+import { ChevronsUpDown, Loader2, LucideIcon, Send } from "lucide-react";
+import { useEffect } from "react";
 
 import { Row } from "~/db/db.interfaces";
 import { vote } from "~/db/db.actions";
 
+import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
-import { useEffect } from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "./ui/collapsible";
 
 const initialState = {
   name: null,
+  context: null,
 };
 
 type ButtonVariants = "normal" | "disabled";
@@ -45,7 +52,7 @@ function VoteButton() {
   );
 }
 
-export function Form({ name }: { name: Row["name"] }) {
+export function Form({ name, count }: { name: Row["name"]; count: number }) {
   const { toast } = useToast();
   const [state, formAction] = useFormState(vote, initialState);
 
@@ -62,7 +69,30 @@ export function Form({ name }: { name: Row["name"] }) {
   return (
     <form action={formAction}>
       <input type="hidden" id="name" name="name" value={name} />
-      <VoteButton />
+
+      <div className="flex flex-row items-center justify-between">
+        <p className="text-sm [&_p]:leading-relaxed">{`Points: ${count}`}</p>
+        <VoteButton />
+      </div>
+
+      <Collapsible>
+        <div className="flex items-center space-x-4">
+          <h4 className="text-sm font-semibold">Write the context?</h4>
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" size="sm" className="w-9 p-0">
+              <ChevronsUpDown className="h-4 w-4" />
+              <span className="sr-only">Toggle</span>
+            </Button>
+          </CollapsibleTrigger>
+        </div>
+        <CollapsibleContent className="pt-5">
+          <Input
+            id="context"
+            name="context"
+            placeholder="Type the context..."
+          />
+        </CollapsibleContent>
+      </Collapsible>
     </form>
   );
 }

@@ -15,9 +15,8 @@ export default async function Home() {
           <Terminal className="h-4 w-4" />
           <AlertTitle>{row.name}</AlertTitle>
 
-          <AlertDescription className="flex flex-row items-center justify-between">
-            <p className="text-sm [&_p]:leading-relaxed">{`Points: ${row.count}`}</p>
-            <Form name={row.name} />
+          <AlertDescription className="">
+            <Form name={row.name} count={row.count} />
           </AlertDescription>
         </Alert>
       ))}

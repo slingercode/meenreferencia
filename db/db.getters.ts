@@ -1,8 +1,23 @@
 import { sql } from "@vercel/postgres";
-import { Row } from "./db.interfaces";
+import { Context, Row } from "./db.interfaces";
 
 export const getData = async (): Promise<Row[]> => {
-  const { rows } = await sql<Row>`SELECT * from meenreferencia ORDER BY name`;
+  try {
+    const { rows } = await sql<Row>`SELECT * from meenreferencia ORDER BY name`;
 
-  return rows;
+    return rows;
+  } catch (error: any) {
+    return [];
+  }
+};
+
+export const getContext = async (): Promise<Context[]> => {
+  try {
+    const { rows } =
+      await sql<Context>`SELECT * from meenreferencia_context ORDER BY name`;
+
+    return rows;
+  } catch (error: any) {
+    return [];
+  }
 };
