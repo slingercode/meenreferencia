@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 export default function Nav() {
   return (
-    <nav className="sticky top-0 flex w-screen justify-between p-4">
+    <nav className="sticky top-0 z-10 flex w-screen justify-between bg-background p-4">
       <Link href="/">
         <Button variant="ghost" size="icon">
           <SquareSlash className="h-4 w-4" />

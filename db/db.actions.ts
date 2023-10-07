@@ -18,10 +18,34 @@ export async function vote(_: any, formData: FormData) {
 
     if (context !== "") {
       await sql`INSERT INTO meenreferencia_context (name, context) VALUES (${name}, ${context})`;
+
       revalidatePath("/context");
     }
 
-    return revalidatePath("/");
+    revalidatePath("/");
+
+    return { success: true };
+  } catch (error: any) {
+    const { message = "There was a error" } = error || {};
+
+    return { error: message };
+  }
+}
+
+export async function addContext(_: any, formData: FormData) {
+  try {
+    const name = (formData.get("name") ?? "").toString();
+    const context = (formData.get("context") ?? "").toString();
+
+    if (name === "" || context === "") {
+      throw new Error("Invalid formData");
+    }
+
+    await sql`INSERT INTO meenreferencia_context (name, context) VALUES (${name}, ${context})`;
+
+    revalidatePath("/context");
+
+    return { success: true };
   } catch (error: any) {
     const { message = "There was a error" } = error || {};
 

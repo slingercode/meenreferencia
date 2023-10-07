@@ -7,5 +7,6 @@ export type Context = {
   id: number;
   name: string;
   context: string;
-  formated: string;
+  /** Formatted date */
+  formatted: string;
 };

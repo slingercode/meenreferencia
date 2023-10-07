@@ -1,5 +1,8 @@
 import { Quote } from "lucide-react";
+
+import { ContextForm } from "~/components/context-form";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+
 import { getContext } from "~/db/db.getters";
 
 export const revalidate = 0;
@@ -9,15 +12,16 @@ export default async function Comments() {
 
   return (
     <main className="md:p-25 mx-auto grid max-w-screen-md gap-4 p-10">
-      {data.map((context) => (
-        <Alert key={context.id}>
+      <ContextForm />
+
+      {data.map(({ id, name, context, formatted }) => (
+        <Alert key={id}>
           <Quote className="h-3 w-3" fill="currentColor" />
-          <AlertTitle>{context.name}</AlertTitle>
+          <AlertTitle className="italic">{context}</AlertTitle>
 
           <AlertDescription>
-            <p className="pb-2 italic">{`"${context.context}"`}</p>
-            <p className="text-right text-xs text-neutral-500">
-              {context.formated}
+            <p className="text-xs text-neutral-500">
+              {`${name} - ${formatted}`}
             </p>
           </AlertDescription>
         </Alert>

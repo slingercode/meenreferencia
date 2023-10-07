@@ -52,11 +52,23 @@ function VoteButton() {
   );
 }
 
-export function Form({ name, count }: { name: Row["name"]; count: number }) {
+export function VoteForm({
+  name,
+  count,
+}: {
+  name: Row["name"];
+  count: number;
+}) {
   const { toast } = useToast();
   const [state, formAction] = useFormState(vote, initialState);
 
   useEffect(() => {
+    if (state?.success === true) {
+      toast({
+        title: "✅ Vote registered",
+      });
+    }
+
     if (state?.error !== undefined) {
       toast({
         variant: "destructive",
@@ -87,7 +99,7 @@ export function Form({ name, count }: { name: Row["name"]; count: number }) {
             <Input
               id="context"
               name="context"
-              placeholder="Type the context..."
+              placeholder="Type the context ..."
             />
           </CollapsibleContent>
         </Collapsible>
