@@ -1,7 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { SquareSlash, TextQuote } from "lucide-react";
 
-import { Button } from "./ui/button";
+import { Button } from "~/components/ui/button";
 
 export default function Nav() {
   return (

@@ -1,9 +1,6 @@
-import { Merge } from "lucide-react";
-
-import { VoteForm } from "~/components/vote-form";
-import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
-
 import { getData } from "~/db/db.getters";
+
+import { VoteElement } from "~/components/vote-element/vote-element";
 
 export const revalidate = 0;
 
@@ -13,14 +10,7 @@ export default async function Home() {
   return (
     <main className="mx-auto flex h-[85dvh] max-w-screen-sm flex-col items-center justify-center gap-4 p-10 md:p-24">
       {rows.map((row) => (
-        <Alert key={row.name}>
-          <Merge className="h-4 w-4" />
-          <AlertTitle>{row.name}</AlertTitle>
-
-          <AlertDescription className="">
-            <VoteForm name={row.name} count={row.count} />
-          </AlertDescription>
-        </Alert>
+        <VoteElement key={row.name} row={row} />
       ))}
     </main>
   );

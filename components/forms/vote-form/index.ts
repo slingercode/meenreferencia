@@ -1,0 +1,1 @@
+export { VoteFormContainer } from "./containers";
