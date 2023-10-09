@@ -8,7 +8,7 @@ export default async function Home() {
   const rows = await getData();
 
   return (
-    <main className="mx-auto flex h-[85dvh] max-w-screen-sm flex-col items-center justify-center gap-4 p-10 md:p-24">
+    <main className="mx-auto flex min-h-[85svh] max-w-screen-sm flex-col items-center justify-center gap-4 p-10 md:p-24">
       {rows.map((row) => (
         <VoteElement key={row.name} row={row} />
       ))}
