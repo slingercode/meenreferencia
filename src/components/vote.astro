@@ -1,0 +1,22 @@
+---
+type Props = {
+  key: "Noel" | "Diego";
+  value: number;
+};
+
+const { key, value } = Astro.props;
+---
+
+<form
+  hx-encoding="multipart/form-data"
+  hx-post="/api/vote"
+  hx-target={`#${key}-count`}
+>
+  <input hidden name="key" value={key} />
+
+  <p>{key}</p>
+
+  <p id={`${key}-count`}>{value}</p>
+
+  <button type="submit">Click - {key}</button>
+</form>
