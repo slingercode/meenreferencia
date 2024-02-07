@@ -1,15 +1,17 @@
 ---
+import { connectRedis } from "../../lib/redis";
+
+const redis = connectRedis();
+
 const formData = await Astro.request.formData();
 
-const key = formData.get("key");
+const key = formData.get("key") ?? "";
 
-let a = 0;
+let count = (await redis.get<number>(key.toString())) ?? 0;
 
-if (key === "Noel") {
-  a = 100;
-} else {
-  a = 900;
-}
+count += 1;
+
+await redis.set(key.toString(), count);
 ---
 
-{a}
+{count}
