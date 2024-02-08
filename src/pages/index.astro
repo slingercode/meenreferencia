@@ -1,13 +1,14 @@
 ---
-import { connectRedis } from "../lib/redis";
-
+import { redis } from "../lib";
 import Layout from "../layouts/layout.astro";
 import Vote from "../components/vote.astro";
 
-const redis = connectRedis();
+await redis.connect();
 
-const noel = (await redis.get<number>("Noel")) ?? 0;
-const diego = (await redis.get<number>("Diego")) ?? 0;
+const noel: string = (await redis.get("Noel")) ?? "";
+const diego: string = (await redis.get("Diego")) ?? "";
+
+await redis.disconnect();
 ---
 
 <Layout>

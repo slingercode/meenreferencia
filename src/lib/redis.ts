@@ -1,8 +1,3 @@
-import { Redis } from "@upstash/redis";
+import { createClient } from "redis";
 
-export const connectRedis = () => {
-  return new Redis({
-    url: import.meta.env.REDIS_URL,
-    token: import.meta.env.REDIS_TOKEN,
-  });
-};
+export const redis = createClient({ url: import.meta.env.REDIS_URL });

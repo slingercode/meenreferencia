@@ -1,5 +1,11 @@
 # meenreferencia
 
+## Env variables
+
+> **The values must be without quotes: `REDIS_URL=redis://...`**
+
+- `REDIS_URL`: A valid `Redis`url connection string.
+
 ## Commands
 
 All commands are run from the root of the project, from a terminal:
