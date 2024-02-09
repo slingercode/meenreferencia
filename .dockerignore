@@ -1,5 +1,8 @@
 # flyctl launch added from .gitignore
 **/scripts
+
+.prettierrc
+
 LICENSE
 README.md
 fly.toml

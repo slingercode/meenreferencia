@@ -14,9 +14,9 @@ const { key, value } = Astro.props;
 >
   <input hidden name="key" value={key} />
 
-  <p>{key}</p>
+  <p class="text-lg">{key}</p>
 
-  <p id={`${key}-count`}>{value}</p>
+  <p id={`${key}-count`} class="pb-5 pt-2 text-3xl font-bold">{value}</p>
 
-  <button type="submit">Click - {key}</button>
+  <button type="submit" class="rounded bg-slate-200 px-5 py-1">Vote</button>
 </form>
