@@ -3,6 +3,14 @@ import { redis } from "../lib";
 import Layout from "../layouts/layout.astro";
 import Vote from "../components/vote.astro";
 
+const darkClass = "bg-black text-white";
+const lightClass = "bg-white text-black";
+
+const random = Math.floor(Math.random() * 10) + 1;
+
+const noelClass = random <= 5 ? darkClass : lightClass;
+const diegoClass = random > 5 ? darkClass : lightClass;
+
 await redis.connect();
 
 const noel: string = (await redis.get("Noel")) ?? "";
@@ -12,8 +20,12 @@ await redis.disconnect();
 ---
 
 <Layout>
-  <main class="flex min-h-[100svh] flex-col items-center justify-center gap-10">
-    <Vote key="Noel" value={noel} />
-    <Vote key="Diego" value={diego} />
+  <main class="flex min-h-[100svh] w-screen flex-col">
+    <div class={`flex h-[50svh] items-center justify-center ${noelClass}`}>
+      <Vote key="Noel" value={noel} />
+    </div>
+    <div class={`flex h-[50svh] items-center justify-center ${diegoClass}`}>
+      <Vote key="Diego" value={diego} />
+    </div>
   </main>
 </Layout>
