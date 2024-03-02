@@ -1,0 +1,1 @@
+docker run -d -e REDIS_URL=redis://redis:6379 -p 3000:3000 --name meenreferencia-app --network meenreferencia-network meenreferencia

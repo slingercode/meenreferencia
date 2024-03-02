@@ -1,1 +1,3 @@
-docker run -d -e REDIS_URL=redis://redis:6379 -p 3000:3000 --name meenreferencia-app --network meenreferencia-network meenreferencia
+pnpm run build && \
+templ generate && \
+REDIS_URL=redis://localhost:6379 go run cmd/main.go

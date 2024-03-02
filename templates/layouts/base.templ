@@ -1,0 +1,24 @@
+package layouts
+
+templ BaseLayout() {
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width" />
+      <meta name="description" content="Local joke" />
+
+      <link rel="icon" type="image/x-icon" href="/public/favicon.ico" />
+
+      <link rel="stylesheet" href="/public/global.css" />
+
+      <script src="/public/htmx.min.js"></script>
+
+      <title>meenreferencia</title>
+    </head>
+
+    <body>
+      { children... }
+    </body>
+  </html>
+}
