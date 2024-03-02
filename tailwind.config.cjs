@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./src/**/*.astro"],
+module.exports = {
+  content: ["./templates/**/*.templ", "./handlers/index.go"],
   theme: {
     extend: {},
   },

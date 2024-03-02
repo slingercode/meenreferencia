@@ -1,0 +1,24 @@
+package components
+
+import (
+  "strconv"
+
+  "github.com/slingercode/meenreferencia.ednoesco.com/structs"
+)
+
+templ Vote(user structs.User) {
+  <form
+    hx-encoding="multipart/form-data"
+    hx-post="/api/vote"
+    hx-target={"#" + user.Key + "-count"}
+    class="w-full text-center"
+  >
+    <input hidden name="key" value={user.Key} />
+
+    <p class="text-4xl">{user.Key}</p>
+
+    <p id={user.Key + "-count"} class="pb-5 pt-2 text-6xl font-bold">{strconv.Itoa(user.Value)}</p>
+
+    <button type="submit" class="rounded border px-5 py-1">Vote</button>
+  </form>
+}
