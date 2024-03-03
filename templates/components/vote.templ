@@ -1,10 +1,6 @@
 package components
 
-import (
-  "strconv"
-
-  "github.com/slingercode/meenreferencia.ednoesco.com/structs"
-)
+import "github.com/slingercode/meenreferencia.ednoesco.com/structs"
 
 templ Vote(user structs.User) {
   <form
@@ -17,7 +13,7 @@ templ Vote(user structs.User) {
 
     <p class="text-4xl">{user.Key}</p>
 
-    <p id={user.Key + "-count"} class="pb-5 pt-2 text-6xl font-bold">{strconv.Itoa(user.Value)}</p>
+    <p id={user.Key + "-count"} class="pb-5 pt-2 text-6xl font-bold">{user.Value}</p>
 
     <button type="submit" class="rounded border px-5 py-1">Vote</button>
   </form>

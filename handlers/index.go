@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"context"
 	"log"
 	"math/rand"
 
@@ -14,41 +13,42 @@ import (
 const (
   darkClass  = "bg-black text-white"
   lightClass = "bg-white text-black"
+  noelKey = "Noel"
+  diegoKey = "Diego"
+  RANDOM_NUMBERS = 10
+  RANDOM_NUMBER_VALIDATION = 5
 )
-
-var _ctx = context.Background()
 
 func HandleIndex(ctx echo.Context) error {
   redis := lib.RedisClient()
-
-  noelValue, err := redis.Get(_ctx, "Noel").Int()
+  values, err := redis.MGet(ctx.Request().Context(), noelKey, diegoKey).Result()
   if err != nil {
     log.Fatal(err)
   }
 
-  diegoValue, err := redis.Get(_ctx, "Diego").Int()
-  if err != nil {
-    log.Fatal(err)
+  if _, ok := values[0].(string); !ok {
+    log.Fatal("error in conversion")
   }
 
-  random := rand.Intn(10) + 1
+  if _, ok := values[1].(string); !ok {
+    log.Fatal("error in conversion")
+  }
 
   noel := structs.User {
-    Key: "Noel",
+    Key: noelKey,
     Class: "",
-    Value: 0,
+    Value: values[0].(string),
   }
 
   diego := structs.User {
-    Key: "Diego",
+    Key: diegoKey,
     Class: "",
-    Value: 0,
+    Value: values[1].(string),
   }
 
-  noel.Value = noelValue
-  diego.Value = diegoValue
+  random := rand.Intn(RANDOM_NUMBERS) + 1
 
-  if random <= 5 {
+  if random <= RANDOM_NUMBER_VALIDATION {
     noel.Class = darkClass
     diego.Class = lightClass
   } else {

@@ -13,7 +13,7 @@ func HandleVote(ctx echo.Context) error {
 
   key := ctx.FormValue("key")
 
-  vote := redis.Incr(_ctx, key).Val()
-
+  vote := redis.Incr(ctx.Request().Context(), key).Val()
+  
   return ctx.String(http.StatusOK, fmt.Sprint(vote))
 }
