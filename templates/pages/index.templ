@@ -1,19 +1,19 @@
 package pages
 
 import (
-  "github.com/slingercode/meenreferencia.ednoesco.com/structs"
+  "github.com/slingercode/meenreferencia.ednoesco.com/cmd"
   "github.com/slingercode/meenreferencia.ednoesco.com/templates/layouts"
   "github.com/slingercode/meenreferencia.ednoesco.com/templates/components"
 )
 
-templ Index(noel, diego structs.User) {
+templ Index(noel, diego cmd.User) {
   @layouts.BaseLayout() {
     <main class="flex min-h-[100svh] w-screen flex-col">
       <div class={"flex h-[50svh] items-center justify-center " + noel.Class}>
-        @components.Vote(noel)
+        @components.Count(noel)
       </div>
       <div class={"flex h-[50svh] items-center justify-center " + diego.Class}>
-        @components.Vote(diego)
+        @components.Count(diego)
       </div>
     </main>
   }

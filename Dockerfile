@@ -14,6 +14,6 @@ RUN go mod download -x
 
 COPY . .
 
-RUN go build -o meenreferencia cmd/main.go
+RUN go build -o meenreferencia main.go
 
 CMD [ "./meenreferencia" ]

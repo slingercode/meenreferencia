@@ -1,12 +1,11 @@
 package handlers
 
 import (
-	"log"
 	"math/rand"
+	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/slingercode/meenreferencia.ednoesco.com/lib"
-	"github.com/slingercode/meenreferencia.ednoesco.com/structs"
+	"github.com/slingercode/meenreferencia.ednoesco.com/cmd"
 	"github.com/slingercode/meenreferencia.ednoesco.com/templates/pages"
 )
 
@@ -20,27 +19,27 @@ const (
 )
 
 func HandleIndex(ctx echo.Context) error {
-  redis := lib.RedisClient()
+  redis := cmd.RedisClient()
   values, err := redis.MGet(ctx.Request().Context(), noelKey, diegoKey).Result()
   if err != nil {
-    log.Fatal(err)
+    return ctx.String(http.StatusInternalServerError, "Error obtaining redis data")
   }
 
   if _, ok := values[0].(string); !ok {
-    log.Fatal("error in conversion")
+    return ctx.String(http.StatusInternalServerError, "Error converting redis data")
   }
 
   if _, ok := values[1].(string); !ok {
-    log.Fatal("error in conversion")
+    return ctx.String(http.StatusInternalServerError, "Error converting redis data")
   }
 
-  noel := structs.User {
+  noel := cmd.User {
     Key: noelKey,
     Class: "",
     Value: values[0].(string),
   }
 
-  diego := structs.User {
+  diego := cmd.User {
     Key: diegoKey,
     Class: "",
     Value: values[1].(string),

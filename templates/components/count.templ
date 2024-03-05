@@ -1,11 +1,11 @@
 package components
 
-import "github.com/slingercode/meenreferencia.ednoesco.com/structs"
+import "github.com/slingercode/meenreferencia.ednoesco.com/cmd"
 
-templ Vote(user structs.User) {
+templ Count(user cmd.User) {
   <form
     hx-encoding="multipart/form-data"
-    hx-post="/api/vote"
+    hx-post="/api/count"
     hx-target={"#" + user.Key + "-count"}
     class="w-full text-center"
   >
@@ -15,6 +15,6 @@ templ Vote(user structs.User) {
 
     <p id={user.Key + "-count"} class="pb-5 pt-2 text-6xl font-bold">{user.Value}</p>
 
-    <button type="submit" class="rounded border px-5 py-1">Vote</button>
+    <button type="submit" class="rounded border px-5 py-1">Count</button>
   </form>
 }
